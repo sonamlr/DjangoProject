@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    List of Student
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% if stu %}
+        {% for st in stu %}
+        <tr>
+            <td>{{st.id}}</td>
+            <td>{{st.name}}</td>
+            <td>{{st.roll}}</td>
+            <td>{{st.email}}</td>
+            <th><a href="{% url "edit_student" %}">Edit</a></th>
+            <th><a href="{% url "delete_student" %}">Delete</a></th>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}

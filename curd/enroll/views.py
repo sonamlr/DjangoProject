@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.contrib import redirects
+from django.shortcuts import render,redirect
+
 from .models import Student
 from .forms import StudentRegistration
 # Create your views here.
@@ -12,7 +12,7 @@ def add_student(request):
         fm = StudentRegistration(request.POST)
         if fm.is_valid():
             fm.save()
-            return redirects('/')
+            return redirect('/')
     else:
         fm = StudentRegistration()
     return render(request, 'add.html', {'form': fm})
@@ -23,11 +23,13 @@ def edit_student(request, pk):
         fm = StudentRegistration(request.POST, instance=stu)
         if fm.is_valid():
             fm.save()
-            return redirects('/')
+            return redirect('/')
     else:
         stu = Student.objects.get(pk=pk)
         fm = StudentRegistration(instance=stu)
     return render(request, 'edit.html', {'pk': pk, 'form': fm})
 
-def delete_student(request):
-    return redirects('/')
+def delete_student(request, pk):
+    stu = Student.objects.get(pk=pk)
+    stu.delete()
+    return redirect('/')

@@ -17,8 +17,8 @@
             <td>{{st.name}}</td>
             <td>{{st.roll}}</td>
             <td>{{st.email}}</td>
-            <th><a href="{% url "edit_student" %}">Edit</a></th>
-            <th><a href="{% url "delete_student" %}">Delete</a></th>
+            <th><a href="{% url 'edit_student' st.id %}">Edit</a></th>
+            <th><a href="{% url 'delete_student' st.id %}">Delete</a></th>
         </tr>
         {% endfor %}
         {% endif %}
